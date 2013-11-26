@@ -12,15 +12,15 @@ Plugin para abrir o conteudo de um arquivo e sobreescrever o conteúdo de uma ur
 
 =cut
 
-sub open_file {
+sub File {
     my ( $self, $args ) = @_; 
     if ( exists $self->urls_to_proxy->{ $self->http_request->{ _uri }->as_string } && 
-         exists $self->urls_to_proxy->{ $self->http_request->{ _uri }->as_string }->{ file } ) {
-        if ( -e $self->urls_to_proxy->{ $self->http_request->{ _uri }->as_string }->{ file } ) {
-          $self->print_file_as_request( $self->urls_to_proxy->{ $self->http_request->{ _uri }->as_string }->{ file } );
+         exists $self->urls_to_proxy->{ $self->http_request->{ _uri }->as_string }->{ File } ) {
+        if ( -e $self->urls_to_proxy->{ $self->http_request->{ _uri }->as_string }->{ File } ) {
+          $self->print_file_as_request( $self->urls_to_proxy->{ $self->http_request->{ _uri }->as_string }->{ File } );
           return 1;
         } else {
-          warn " FILE NOT FOUND: " . $self->urls_to_proxy->{ $self->http_request->{ _uri }->as_string }->{ file };
+          warn " FILE NOT FOUND: " . $self->urls_to_proxy->{ $self->http_request->{ _uri }->as_string }->{ File };
         }
         return 0;
     }
@@ -28,7 +28,7 @@ sub open_file {
 
 after 'BUILD'=>sub {
     my ( $self ) = @_; 
-    $self->append_plugin_method( "open_file" );
+    $self->append_plugin_method( "File" );
 };
 1;
 __END__
