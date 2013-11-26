@@ -14,7 +14,7 @@ with qw/
 /;
 
 my $url_path;
-my $proxy_port        = 32452;
+my $proxy_port        = int(rand(9999))+50000;
 my $tests_config      = TestsConfig->new();
 my $server            = TestServer->new();
    $server->set_dispatch( $tests_config->conteudos );
@@ -23,7 +23,7 @@ my $pid_server        = $server->background();
 
 my $p = My::Proxy->new( urls_to_proxy => {
     $server->root . "/scripts.js" => {
-        "file" => file( "t", "arquivo.js" )
+        File => file( "t", "arquivo.js" )
     }
 } );
 
@@ -37,11 +37,13 @@ my $ua_proxy = HTTP::Tiny->new( proxy => "http://127.0.0.1:$proxy_port" );
 #  NORMAL REQUEST (WITHOUT PROXY)
 my $res            = $ua->get( $server->root . "/scripts.js");
 my $content_wanted = $tests_config->conteudos->{ '/scripts.js' }->{args}->{ content }->{ original };
+
 ok( $res->{ content } eq $content_wanted , "Content is fine" );
 
 #  REQUEST WITH PROXY (CONTENT WILL BE MODIFIED)
 my $res_proxy      = $ua_proxy->get( $server->root . "/scripts.js");
    $content_wanted = $tests_config->conteudos->{ '/scripts.js' }->{args}->{ content }->{ altered };
+
 ok( $res_proxy->{ content } eq $content_wanted , "Content is fine, was modified as expected" );
 
 
@@ -56,7 +58,7 @@ ok( $res_proxy->{ content } eq $content_wanted , "Content is fine, was modified 
 
 
 #depois dos testes..
-kill 'HUP', $pid, $pid_server;
+kill 'KILL', $pid, $pid_server;
 
 
 
