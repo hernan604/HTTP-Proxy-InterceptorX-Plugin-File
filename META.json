@@ -1,5 +1,5 @@
 {
-   "abstract" : "Blah blah blah",
+   "abstract" : "overwrite the response content with file content",
    "author" : [
       "Hernan Lopes <hernan@cpan.org>"
    ],
@@ -46,6 +46,20 @@
       }
    },
    "release_status" : "stable",
-   "version" : "0.01"
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/hernan604/HTTP-Proxy-InterceptorX-Plugin-File/issues"
+      },
+      "homepage" : "https://github.com/hernan604/HTTP-Proxy-InterceptorX-Plugin-File",
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/hernan604/HTTP-Proxy-InterceptorX-Plugin-File.git",
+         "web" : "https://github.com/hernan604/HTTP-Proxy-InterceptorX-Plugin-File"
+      }
+   },
+   "version" : "0.01",
+   "x_contributors" : [
+      "Hernan Lopes <aut_hlopes@uolinc.com>"
+   ]
 }
 
